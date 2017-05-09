@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter intentF = new IntentFilter();
         intentF.addAction(SomeService.WAKE_RECEIVER);
         registerReceiver(new MyReceiver(),intentF);
+
 
     }
 
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             Log.d("ibrahim","Bradcast received");
             Log.d("ibrahim", intent.getStringExtra("info"));
+            Toast.makeText(MainActivity.this,intent.getStringExtra("info"),Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -13,10 +13,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class SomeService extends IntentService {
+//public class SomeService extends Service{
 
     public final static String ACTION_DOWNLOAD ="Download";
     public final static String ACTION_TOAST="Toast";
     public final static String WAKE_RECEIVER="wakeitUp";
+
     public SomeService() {
         super("Dowloader");
     }
@@ -29,7 +31,7 @@ public class SomeService extends IntentService {
 
 
     @Override
-   // public int onStartCommand(Intent intent, int flags, int startId) {
+    //public int onStartCommand(Intent intent, int flags, int startId) {
     protected void onHandleIntent(Intent intent){
         //return super.onStartCommand(intent, flags, startId);
         Log.d("ibrahim","Service Started");
@@ -40,6 +42,7 @@ public class SomeService extends IntentService {
         }
         else if(intent.getAction().equals(ACTION_DOWNLOAD)){
             try {
+                Log.d("ibrahim", "Downloading something!");
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -56,6 +59,7 @@ public class SomeService extends IntentService {
 
         //send notifications
         Intent in = new Intent(this,MainActivity.class);
+        intent.putExtra("notif", "Not");
         PendingIntent pIntent = PendingIntent.getActivity(this,0,in,0);
 
         Notification.Builder builder = new Notification.Builder(this)
@@ -70,8 +74,6 @@ public class SomeService extends IntentService {
         nm.notify(124,notification);
 
 
-
-
-       // return START_STICKY;
+       //return START_STICKY;
     }
 }
